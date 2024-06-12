@@ -31,10 +31,10 @@
         gap: 1rem;
     }
     .inputBoxBlue {
-        background-color: #1c5387;
+        background-color: #114a84;
     }
     .inputBoxRed {
-        background-color: #9c281d;
+        background-color: #9a231b;
     }
 </style>
 

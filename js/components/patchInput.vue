@@ -1,6 +1,6 @@
 <template>
     <div :class="[$style.superContainer, containerClassName]">
-        <div class="alert alert-danger" :class="$style.alert" v-if="errorMessage">{{ errorMessage }}</div>
+        <div class="alert alert-danger" :class="$style.alert" role="alert" v-if="errorMessage">{{ errorMessage }}</div>
         <div :class="$style.container">
             <file-input 
                 :title="title" 

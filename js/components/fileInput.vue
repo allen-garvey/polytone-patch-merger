@@ -1,14 +1,11 @@
 <template>
-    <div :class="$style.container">
+    <div>
         <label :for="id" :class="$style.label" class="form-label">{{ title }}</label>
         <input type="file" :id="id" class="form-control" @change="fileSelected" />
     </div>
 </template>
 
 <style lang="scss" module>
-    .container {
-
-    }
     .label {
         display: inline-block;
         margin-bottom: 0.2em;
@@ -53,10 +50,6 @@ export default {
             fileReader: null,
             fileName: '',
         };
-    },
-    computed: {
-    },
-    watch: {
     },
     methods: {
         fileSelected($event){

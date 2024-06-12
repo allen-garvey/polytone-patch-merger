@@ -10,6 +10,7 @@
                 v-if="patch === null" 
             />
             <div :class="$style.inputPatchName" v-else>
+                <span>{{ title }}</span>
                 <h3>{{ patch.name }}</h3>
                 <button class="btn btn-sm btn-light" @click="onPatchCleared">Clear</button>
             </div>

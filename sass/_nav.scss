@@ -1,0 +1,21 @@
+.nav {
+    margin-bottom: 2em;
+
+    a {
+        color: #999;
+
+        &:hover {
+            color: inherit;
+        }
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5em 2em;
+        justify-content: flex-end;
+    }
+}

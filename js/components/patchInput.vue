@@ -22,6 +22,7 @@
     .superContainer {
         flex-grow: 1;
         flex-basis: 0;
+        min-width: 10em;
     }
     .alert {
         border-top-right-radius: 0;

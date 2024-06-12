@@ -21,6 +21,7 @@
 <style lang="scss" module>
     .superContainer {
         flex-grow: 1;
+        flex-basis: 0;
     }
     .alert {
         border-top-right-radius: 0;

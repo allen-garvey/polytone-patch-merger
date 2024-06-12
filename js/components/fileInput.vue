@@ -13,6 +13,8 @@
 </style>
 
 <script>
+import { doesPolytonePatchHaveError } from '../polytone';
+
 export default {
     props: {
         title: {
@@ -69,8 +71,11 @@ export default {
             this.fileReader.readAsText(file);
         },
         fileRead(content){
-            // TODO validate valid XML and possibly DTD first
-            // also check xml to see if this is actually a polytone patch
+            const error = doesPolytonePatchHaveError(this.fileName, content);
+            if(error){
+                return this.onError(error);
+            }
+
             this.onFileSelected({
                 name: this.fileName,
                 content,

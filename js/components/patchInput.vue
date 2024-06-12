@@ -1,22 +1,31 @@
 <template>
-    <div :class="[$style.container, containerClassName]">
-        <file-input 
-            :title="title" 
-            :id="id" 
-            :onError="onError"
-            :onFileSelected="onFileSelected"
-            v-if="patch === null" 
-        />
-        <div :class="$style.inputPatchName" v-else>
-            <h3>{{ patch.name }}</h3>
-            <button class="btn btn-sm btn-light" @click="onPatchCleared">Clear</button>
+    <div :class="[$style.superContainer, containerClassName]">
+        <div class="alert alert-danger" :class="$style.alert" v-if="errorMessage">{{ errorMessage }}</div>
+        <div :class="$style.container">
+            <file-input 
+                :title="title" 
+                :id="id" 
+                :onError="onError"
+                :onFileSelected="onFileSelectedLocal"
+                v-if="patch === null" 
+            />
+            <div :class="$style.inputPatchName" v-else>
+                <h3>{{ patch.name }}</h3>
+                <button class="btn btn-sm btn-light" @click="onPatchCleared">Clear</button>
+            </div>
         </div>
     </div>
 </template>
 
 <style lang="scss" module>
-    .container {
+    .superContainer {
         flex-grow: 1;
+    }
+    .alert {
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+    }
+    .container {
         color: #fafafa;
         padding: 4rem 2rem;
         display: flex;
@@ -45,10 +54,6 @@ export default {
             type: String,
             required: true,
         },
-        onError: {
-            type: Function,
-            required: true,
-        },
         onFileSelected: {
             type: Function,
             required: true,
@@ -64,5 +69,20 @@ export default {
     components: {
         fileInput,
     },
+    data(){
+        return {
+            errorMessage: '',
+        };
+    },
+    methods: {
+        onFileSelectedLocal(file){
+            this.errorMessage = '';
+            this.onFileSelected(file);
+
+        },
+        onError(message){
+            this.errorMessage = message;
+        },
+    }
 };
 </script>

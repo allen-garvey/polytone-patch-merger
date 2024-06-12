@@ -8,6 +8,13 @@ body {
     padding: 1rem;
 }
 
+a {
+    text-decoration: none;
+    &:hover, &:focus-visible {
+        text-decoration: underline;
+    }
+}
+
 h1, h2, h3 {
     margin: 0 0 1em;
 }

@@ -1,7 +1,7 @@
 <template>
     <div>
         <label :for="id" :class="$style.label" class="form-label">{{ title }}</label>
-        <input type="file" :id="id" class="form-control" @change="fileSelected" />
+        <input type="file" :id="id" class="form-control" :class="$style.input" @change="fileSelected" />
     </div>
 </template>
 
@@ -9,6 +9,11 @@
     .label {
         display: inline-block;
         margin-bottom: 0.2em;
+    }
+    .input {
+        &:focus-visible {
+            outline: 4px solid magenta;
+        }
     }
 </style>
 

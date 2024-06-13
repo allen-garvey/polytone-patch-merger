@@ -71,7 +71,6 @@ export default {
     },
     methods: {
         onFileSelected(key, file){
-            console.log(file);
             this[key] = file;
         },
     }

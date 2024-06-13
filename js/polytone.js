@@ -14,16 +14,6 @@ export const doesPolytonePatchHaveError = (fileName, fileContent) => {
         return `${fileName} is a Polytone patch.`;
     }
 
-    // console.log(
-    //     JSON.stringify(
-    //         [
-    //             ...xml.querySelectorAll(
-    //                 'Properties > Object[name="custom_properties"] > Value'
-    //             ),
-    //         ].map((el) => el.getAttribute('property'))
-    //     )
-    // );
-
     return false;
 };
 

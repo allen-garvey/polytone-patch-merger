@@ -1,7 +1,7 @@
 <template>
     <div>
         <label :for="id" :class="$style.label" class="form-label">{{ title }}</label>
-        <input type="file" :id="id" class="form-control" :class="$style.input" @change="fileSelected" />
+        <input type="file" accept=".repatch" :id="id" class="form-control" :class="$style.input" @change="fileSelected" />
     </div>
 </template>
 

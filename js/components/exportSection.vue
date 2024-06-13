@@ -21,10 +21,10 @@
                 <input type="text" class="form-control" v-model="fileName" />
             </label>
             <div :class="$style.buttonContainer">
-                <button class="btn btn-sm btn-success">Save</button>
+                <button class="btn btn-sm btn-success" @click="exportPatch" :disabled="isSaving">Save</button>
             </div>
         </div>
-        <a ref="downloadLink" :download="fileName" v-show="false"></a>
+        <a ref="downloadLink" :download="`${fileName}.repatch`" v-show="false"></a>
     </div>
 </template>
 
@@ -45,14 +45,13 @@
 
 <script>
 import selectInput from './selectInput.vue';
+import { mergePatches } from '../polytone';
 
 export default {
     props: {
-        patch1: {
-            type: Object,
-        },
-        patch2: {
-            type: Object,
+        patches: {
+            type: Array,
+            required: true,
         },
     },
     components: {
@@ -68,6 +67,7 @@ export default {
             layerAIndex: 0,
             layerBIndex: 0,
             globalParametersIndex: 0,
+            isSaving: false,
         };
     },
     computed: {
@@ -102,6 +102,25 @@ export default {
     watch: {
     },
     methods: {
+        exportPatch(){
+            this.isSaving = true;
+            
+            const layerAOption = this.exportOptions[this.layerAIndex];
+            const layerBOption = this.exportOptions[this.layerBIndex];
+            const exportPatchString = mergePatches(this.patches, layerAOption.patchIndex, layerAOption.layerIndex, layerBOption.patchIndex, layerBOption.layerIndex, this.globalParametersIndex);
+            
+            const blob = new Blob([exportPatchString], {type: 'application/xml'});
+            const objectUrl = URL.createObjectURL(blob);
+
+            this.$refs.downloadLink.href = objectUrl;
+            this.$refs.downloadLink.click();
+
+            setTimeout(() => {
+                URL.revokeObjectURL(objectUrl);
+                this.isSaving = false;
+            }, 1);
+
+        },
     }
 };
 </script>

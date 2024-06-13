@@ -19,8 +19,7 @@
             />
         </div>
         <export-section 
-            :patch1="patch1"
-            :patch2="patch2"
+            :patches="patches"
             v-show="patch1 && patch2"
         />
     </div>
@@ -61,6 +60,12 @@ export default {
         };
     },
     computed: {
+        patches(){
+            return [
+                this.patch1?.content,
+                this.patch2?.content,
+            ];
+        },
     },
     watch: {
     },

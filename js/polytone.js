@@ -75,7 +75,7 @@ const getPatchNode = (xml, key) =>
         `Properties > Object[name="custom_properties"] > Value[property="${key}"]`
     );
 
-const getPatchValue = (xml, key) => getPatchNode(xml, key).innerHTML.trim();
+const getPatchValue = (xml, key) => getPatchNode(xml, key).innerHTML;
 const setPatchValue = (xml, key, value) =>
     (getPatchNode(xml, key).innerHTML = value);
 

@@ -18,6 +18,11 @@
                 :patch="patch2"
             />
         </div>
+        <export-section 
+            :patch1="patch1"
+            :patch2="patch2"
+            v-show="patch1 && patch2"
+        />
     </div>
 </template>
 
@@ -40,10 +45,12 @@
 
 <script>
 import patchInput from './patchInput.vue';
+import exportSection from './exportSection.vue';
 
 export default {
     components: {
         patchInput,
+        exportSection,
     },
     created(){
     },

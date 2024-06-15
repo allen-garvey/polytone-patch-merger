@@ -87,40 +87,30 @@ export const mergePatches = (
     layerBLayerIndex,
     globalParametersPatchIndex
 ) => {
-    // check to see if we don't need to update the patch
-    if (
-        layerAPatchIndex === layerBPatchIndex &&
-        layerBPatchIndex === globalParametersPatchIndex &&
-        layerALayerIndex === 0 &&
-        layerBLayerIndex === 1
-    ) {
-        return patches[layerAPatchIndex];
-    }
-
     const exportXml = parseXml(patches[globalParametersPatchIndex]);
 
     const options = [
         {
             patch: parseXml(patches[layerAPatchIndex]),
-            sourceParameterIndex: layerAPatchIndex,
-            destParameterIndex: 0,
+            sourceLayerParameterIndex: layerALayerIndex,
+            destLayerParameterIndex: 0,
         },
         {
             patch: parseXml(patches[layerBPatchIndex]),
-            sourceParameterIndex: layerBPatchIndex,
-            destParameterIndex: 1,
+            sourceLayerParameterIndex: layerBLayerIndex,
+            destLayerParameterIndex: 1,
         },
     ];
     options.forEach((option) => {
         const patch = option.patch;
         layerParameterKeys.forEach((layerParameterKeys) => {
-            const sourceParameterKey =
-                layerParameterKeys[option.sourceParameterIndex];
-            const destParameterKey =
-                layerParameterKeys[option.destParameterIndex];
+            const sourceLayerParameterKey =
+                layerParameterKeys[option.sourceLayerParameterIndex];
+            const destLayerParameterKey =
+                layerParameterKeys[option.destLayerParameterIndex];
 
-            const sourceValue = getPatchValue(patch, sourceParameterKey);
-            setPatchValue(exportXml, destParameterKey, sourceValue);
+            const sourceValue = getPatchValue(patch, sourceLayerParameterKey);
+            setPatchValue(exportXml, destLayerParameterKey, sourceValue);
         });
     });
 

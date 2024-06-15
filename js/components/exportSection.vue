@@ -65,7 +65,7 @@ export default {
         return {
             fileName: 'polytone',
             layerAIndex: 0,
-            layerBIndex: 0,
+            layerBIndex: 2,
             globalParametersIndex: 0,
             isSaving: false,
         };

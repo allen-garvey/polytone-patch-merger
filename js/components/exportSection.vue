@@ -1,7 +1,7 @@
 <template>
     <div :class="$style.export">
         <h3>Export</h3>
-        <div>
+        <form @submit.prevent="exportPatch">
             <select-input
                 label="Layer A"
                 :options="exportLabels"
@@ -21,9 +21,9 @@
                 <input type="text" class="form-control" v-model="fileName" />
             </label>
             <div :class="$style.buttonContainer">
-                <button class="btn btn-sm btn-success" @click="exportPatch" :disabled="isSaving">Save</button>
+                <button class="btn btn-sm btn-success" type="submit" :disabled="isSaving">Save</button>
             </div>
-        </div>
+        </form>
         <a ref="downloadLink" :download="`${fileName}.repatch`" v-show="false"></a>
     </div>
 </template>
@@ -103,6 +103,9 @@ export default {
     },
     methods: {
         exportPatch(){
+            if(this.isSaving){
+                return;
+            }
             this.isSaving = true;
             
             const layerAOption = this.exportOptions[this.layerAIndex];

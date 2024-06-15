@@ -51,8 +51,6 @@ export default {
         patchInput,
         exportSection,
     },
-    created(){
-    },
     data(){
         return {
             patch1: null,
@@ -66,8 +64,6 @@ export default {
                 this.patch2?.content,
             ];
         },
-    },
-    watch: {
     },
     methods: {
         onFileSelected(key, file){

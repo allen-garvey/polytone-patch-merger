@@ -57,10 +57,6 @@ export default {
     components: {
         selectInput,
     },
-    created(){
-    },
-    mounted(){
-    },
     data(){
         return {
             fileName: 'polytone',

@@ -12,6 +12,7 @@
                 :id="id" 
                 :onError="onError"
                 :onFileSelected="onFileSelectedLocal"
+                @dragover.prevent="onDragOver"
                 ref="fileInput"
                 v-show="patch === null" 
             />
@@ -35,7 +36,7 @@
         border: $border-size solid rgba(0,0,0,0);
 
         &.dragActive {
-            background-color: magenta;
+            background-color: #da6cda;
             border: $border-size dashed #cacaca;
         }
     }

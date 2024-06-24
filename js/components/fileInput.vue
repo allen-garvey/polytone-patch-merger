@@ -60,8 +60,9 @@ export default {
     },
     methods: {
         fileSelected($event){
-            const files = $event.target.files;
-            
+            this.processFiles($event.target.files);
+        },
+        processFiles(files){
             if(files.length === 0){
                 return this.onError('No files selected.');
             }

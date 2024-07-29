@@ -41,6 +41,12 @@
         justify-content: flex-end;
         margin-top: 1em;
     }
+
+    @media (prefers-color-scheme: dark) {
+        .export {
+            background-color: #333;
+        }
+    }
 </style>
 
 <script>

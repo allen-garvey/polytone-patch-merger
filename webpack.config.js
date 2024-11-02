@@ -21,7 +21,9 @@ module.exports = {
         port: 3000,
         open: true,
         client: {
-            overlay: {},
+            overlay: {
+                warnings: false,
+            },
         },
         historyApiFallback: {
             index: 'index.html',

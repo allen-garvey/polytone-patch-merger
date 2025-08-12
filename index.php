@@ -1,3 +1,10 @@
+<?php
+
+$is_single_file = array_key_exists(1, $argv) && $argv[1] === '--single-file';
+$current_directory = dirname(__FILE__);
+
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,7 +15,12 @@
             content="Do you love Reason's Polytone Dual-Layer Synthesizer but wish you could combine two existing patches (presets)? This tool allows you to do just that. Just open two patches, select a source for layer A, layer B, and the global parameters, and export your brand new patch!"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+        <?php if($is_single_file): 
+            echo '<style>'.file_get_contents($current_directory.'/public/assets/style.css').'</style>';
+        ?>
+        <?php else: ?>
+            <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+        <?php endif; ?>
     </head>
     <body>
         <nav class="nav">
@@ -38,12 +50,20 @@
             brand new patch!
         </p>
 
-        <p>
-            <a href="/polytone-patch-merger.html" download
-                >Click to download a single-file version to use offline</a
-            >
-        </p>
+        <?php if(!$is_single_file): ?>
+            <p>
+                <a href="/polytone-patch-merger.html" download
+                    >Click to download a single-file version to use offline</a
+                >
+            </p>
+        <?php endif; ?>
+
         <div id="app"></div>
-        <script src="/assets/app.js"></script>
+        <?php if($is_single_file): 
+            echo '<script>'.file_get_contents($current_directory.'/public/assets/app.js').'</script>';
+        ?>
+        <?php else: ?>
+            <script src="/assets/app.js"></script>
+        <?php endif; ?>
     </body>
 </html>

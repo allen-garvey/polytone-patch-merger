@@ -10,6 +10,7 @@ Web app to combine two patches for [Reason's Polytone synth](https://www.reasons
 ## Getting Started
 
 * `npm install`
+* `npm run index`
 * `npm start`
 
 ## License

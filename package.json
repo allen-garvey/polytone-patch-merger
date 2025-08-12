@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "index": "php index.php > public/index.html",
     "start": "webpack serve --config webpack.config.js",
     "build": "webpack --config webpack.config.js",
-    "deploy": "webpack --config webpack.config.js --mode='production' && php single-file.php > public/polytone-patch-merger.html"
+    "deploy": "webpack --config webpack.config.js --mode='production' && php index.php --single-file > public/polytone-patch-merger.html"
   },
   "author": "Allen Garvey",
   "license": "MIT",

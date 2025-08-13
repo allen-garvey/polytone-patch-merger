@@ -1,6 +1,6 @@
 <?php
 
-$is_single_file = array_key_exists(1, $argv) && $argv[1] === '--single-file';
+$is_single_file = count($argv) > 1 && $argv[1] === '--single-file';
 $current_directory = dirname(__FILE__);
 
 ?>

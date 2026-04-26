@@ -17,36 +17,41 @@
                 :options="['Patch 1', 'Patch 2']"
                 v-model="globalParametersIndex"
             />
-            <label class="form-label">File Name
+            <label class="form-label"
+                >File Name
                 <input type="text" class="form-control" v-model="fileName" />
             </label>
             <div :class="$style.buttonContainer">
-                <button class="btn btn-sm btn-success" type="submit" :disabled="isSaving">Save</button>
+                <button
+                    class="btn btn-sm btn-success"
+                    type="submit"
+                    :disabled="isSaving"
+                >
+                    Save
+                </button>
             </div>
         </form>
-        <a ref="downloadLink" :download="`${fileName}.repatch`" v-show="false"></a>
+        <a
+            ref="downloadLink"
+            :download="`${fileName}.repatch`"
+            v-show="false"
+        ></a>
     </div>
 </template>
 
 <style lang="scss" module>
-    .export {
-        background-color: #fafafa;
-        padding: 1rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .buttonContainer {
-        display: flex;
-        justify-content: flex-end;
-        margin-top: 1em;
-    }
-
-    @media (prefers-color-scheme: dark) {
-        .export {
-            background-color: #333;
-        }
-    }
+.export {
+    background-color: var(--color-background-secondary);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1em;
+}
 </style>
 
 <script>
@@ -63,7 +68,7 @@ export default {
     components: {
         selectInput,
     },
-    data(){
+    data() {
         return {
             fileName: 'polytone',
             layerAIndex: 0,
@@ -73,7 +78,7 @@ export default {
         };
     },
     computed: {
-        exportOptions(){
+        exportOptions() {
             return [
                 {
                     label: 'Patch 1 Layer A',
@@ -97,24 +102,32 @@ export default {
                 },
             ];
         },
-        exportLabels(){
+        exportLabels() {
             return this.exportOptions.map(option => option.label);
         },
     },
-    watch: {
-    },
+    watch: {},
     methods: {
-        exportPatch(){
-            if(this.isSaving){
+        exportPatch() {
+            if (this.isSaving) {
                 return;
             }
             this.isSaving = true;
-            
+
             const layerAOption = this.exportOptions[this.layerAIndex];
             const layerBOption = this.exportOptions[this.layerBIndex];
-            const exportPatchString = mergePatches(this.patches, layerAOption.patchIndex, layerAOption.layerIndex, layerBOption.patchIndex, layerBOption.layerIndex, this.globalParametersIndex);
-            
-            const blob = new Blob([exportPatchString], {type: 'application/xml'});
+            const exportPatchString = mergePatches(
+                this.patches,
+                layerAOption.patchIndex,
+                layerAOption.layerIndex,
+                layerBOption.patchIndex,
+                layerBOption.layerIndex,
+                this.globalParametersIndex
+            );
+
+            const blob = new Blob([exportPatchString], {
+                type: 'application/xml',
+            });
             const objectUrl = URL.createObjectURL(blob);
 
             this.$refs.downloadLink.href = objectUrl;
@@ -124,8 +137,7 @@ export default {
                 URL.revokeObjectURL(objectUrl);
                 this.isSaving = false;
             }, 1);
-
         },
-    }
+    },
 };
 </script>

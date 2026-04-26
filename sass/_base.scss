@@ -1,17 +1,21 @@
 html {
+    --color-background: #eff0f0;
+    --color-background-secondary: #fafafa;
+    --color-font: #000;
+    --color-link: blue;
+
     font-family: sans-serif;
-    background-color: #eff0f0;
+    background-color: var(--color-background);
+    color: var(--color-font);
 }
 
 @media (prefers-color-scheme: dark) {
     html {
-        background-color: #333;
-        color: #fff;
+        --color-background: #333;
+        --color-background-secondary: #333;
+        --color-font: #fff;
+        --color-link: #9a9a9a;
     }
-
-	a {
-		color: #9a9a9a;
-	}
 }
 
 body {
@@ -21,12 +25,16 @@ body {
 
 a {
     text-decoration: none;
-    &:hover, &:focus-visible {
+    color: var(--color-link);
+    &:hover,
+    &:focus-visible {
         text-decoration: underline;
     }
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     margin: 0 0 1em;
 }
 

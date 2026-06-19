@@ -4,6 +4,7 @@
  */
 
 import { UserConfig, PluginOption } from 'vite';
+import { parse as parseHtml } from 'node-html-parser';
 import type { OutputChunk, OutputAsset } from 'rollup';
 
 function replaceScript(
@@ -11,20 +12,19 @@ function replaceScript(
     scriptFilename: string,
     scriptCode: string
 ): string {
-    const f = scriptFilename.replaceAll('.', '\\.');
-    const reScript = new RegExp(
-        `<script([^>]*?) src="(?:[^"]*?/)?${f}"([^>]*)></script>`
-    );
     const preloadMarker = /"?__VITE_PRELOAD__"?/g;
     const newCode = scriptCode
         .replace(preloadMarker, 'void 0')
         .replace(/<(\/script>|!--)/g, '\\x3C$1');
-    const inlined = html.replace(
-        reScript,
-        (_, beforeSrc, afterSrc) =>
-            `<script${beforeSrc}${afterSrc}>${newCode.trim()}</script>`
+    const htmlRoot = parseHtml(html);
+    const scriptTag = htmlRoot.querySelector(
+        `script[src="./${scriptFilename}"]`
     );
-    return inlined;
+    if (scriptTag) {
+        scriptTag.removeAttribute('src');
+        scriptTag.textContent = newCode.trim();
+    }
+    return htmlRoot.toString();
 }
 
 function replaceCss(
@@ -32,15 +32,18 @@ function replaceCss(
     scriptFilename: string,
     scriptCode: string
 ): string {
-    const f = scriptFilename.replaceAll('.', '\\.');
-    const reStyle = new RegExp(`<link([^>]*?) href="(?:[^"]*?/)?${f}"([^>]*)>`);
+    console.log(scriptCode);
     const newCode = scriptCode.replace(`@charset "UTF-8";`, '');
-    const inlined = html.replace(
-        reStyle,
-        (_, beforeSrc, afterSrc) =>
-            `<style${beforeSrc}${afterSrc}>${newCode.trim()}</style>`
-    );
-    return inlined;
+    const htmlRoot = parseHtml(html);
+    const linkTag = htmlRoot.querySelector(`link[href="./${scriptFilename}"]`);
+    if (linkTag) {
+        linkTag.setAttributes({});
+        linkTag.setAttribute('rel', 'stylesheet');
+        linkTag.tagName = 'style';
+        linkTag.textContent = newCode.trim();
+    }
+
+    return htmlRoot.toString();
 }
 
 const isJsFile = /\.[mc]?js$/;

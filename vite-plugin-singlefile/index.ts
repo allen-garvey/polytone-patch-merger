@@ -32,7 +32,6 @@ function replaceCss(
     scriptFilename: string,
     scriptCode: string
 ): string {
-    console.log(scriptCode);
     const newCode = scriptCode.replace(`@charset "UTF-8";`, '');
     const htmlRoot = parseHtml(html);
     const linkTag = htmlRoot.querySelector(`link[href="./${scriptFilename}"]`);

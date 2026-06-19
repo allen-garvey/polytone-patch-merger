@@ -1,4 +1,4 @@
-import css from '../sass/app.scss';
+import '../sass/app.scss';
 import { createApp } from 'vue';
 import App from './components/app.vue';
 

@@ -86,7 +86,6 @@ export default (): PluginOption => {
         generateBundle(_options: unknown, bundle: Record<string, unknown>) {
             const warnNotInlined = (filename: string) =>
                 this.info(`NOTE: asset not inlined: ${filename}`);
-            this.info('\n');
             const files = {
                 html: [] as string[],
                 css: [] as string[],

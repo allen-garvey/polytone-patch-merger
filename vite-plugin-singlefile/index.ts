@@ -37,7 +37,6 @@ function replaceCss(
     const linkTag = htmlRoot.querySelector(`link[href="./${scriptFilename}"]`);
     if (linkTag) {
         linkTag.setAttributes({});
-        linkTag.setAttribute('rel', 'stylesheet');
         linkTag.tagName = 'style';
         linkTag.textContent = newCode.trim();
     }
